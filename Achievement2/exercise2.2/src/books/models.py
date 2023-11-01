@@ -1,20 +1,21 @@
 from django.db import models
 
+
 # Create your models here.
 
 genre_choices = (
-    ("classic", "Classic"),
-    ("romantic", "Romantic"),
-    ("comedy", "Comedy"),
-    ("fantasy", "Fantasy"),
-    ("horror", "Horror"),
-    ("educational", "Educational"),
+    ("cl", "Classic"),
+    ("ro", "Romantic"),
+    ("co", "Comedy"),
+    ("fa", "Fantasy"),
+    ("ho", "Horror"),
+    ("ed", "Educational"),
 )
 
 book_type_choices = (
-    ("hardcover", "Hard cover"),
-    ("ebook", "E-Book"),
-    ("audiobook", "Audiobook"),
+    ("hc", "Hard cover"),
+    ("eb", "E-Book"),
+    ("ab", "Audiobook"),
 )
 
 
@@ -24,6 +25,7 @@ class Book(models.Model):
     price = models.FloatField(help_text="in US dollars $")
     genre = models.CharField(max_length=12, choices=genre_choices, default="cl")
     book_type = models.CharField(max_length=12, choices=book_type_choices, default="hc")
+    pic = models.ImageField(upload_to="books", default="no_picture.jpg")
 
     def __str__(self):
         return str(self.name)
