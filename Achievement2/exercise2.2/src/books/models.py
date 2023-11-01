@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 
 
 # Create your models here.
@@ -26,6 +27,9 @@ class Book(models.Model):
     genre = models.CharField(max_length=12, choices=genre_choices, default="cl")
     book_type = models.CharField(max_length=12, choices=book_type_choices, default="hc")
     pic = models.ImageField(upload_to="books", default="no_picture.jpg")
+
+    def get_absolute_url(self):
+        return reverse("books:detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return str(self.name)
