@@ -1,0 +1,190 @@
+.body {
+  width: 100%;
+  padding: 0;
+  margin: 20px;
+}
+
+.recipe_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 17px;
+  padding: 23px 23px 23px 23px;
+  margin: 2px;
+  margin-top: 30px;
+}
+
+.grid_item {
+  text-align: center;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 20px;
+  position: relative;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+}
+
+.food_images {
+  max-width: 80%;
+  height: auto;
+  border-radius: 6px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.details_modal {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15vh;
+  padding: 3px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 1px 1px 1px #5c5c5c;
+  margin: 0 auto;
+  font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  justify-content: center;
+}
+
+.details_body {
+  display: flex;
+  flex-direction: row;
+  margin: 12px;
+}
+
+.details_short {
+  padding: 8px;
+  text-align: left;
+  text-justify: center;
+  margin: 12px;
+}
+
+.details_long {
+  padding: 8px;
+  margin-top: 35px;
+}
+
+h1,
+h3 {
+  color: #ffffff;
+  font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+  text-align: center;
+}
+
+h2 {
+  color: #000000;
+  font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+  text-align: center;
+}
+
+.login_btn {
+  font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+  font-size: 18px;
+  background-color: darkolivegreen;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 25px;
+  color: #ffffff;
+  font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+  font-size: 16px;
+}
+
+.nav_bar {
+  width: 95vw;
+  height: 4vh;
+  margin: 0 auto;
+  margin-bottom: 2px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.success_block {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(94, 94, 94, 0.418);
+  border-radius: 10px;
+  padding: 25px;
+  color: #ffffff;
+  font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+  font-size: 16px;
+}
+
+.login_again_btn {
+  font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+  font-size: 18px;
+  background-color: darkolivegreen;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.search_results {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15vh;
+  padding: 3px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 1px 1px 1px #5c5c5c;
+  margin: 0 auto;
+  font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  justify-content: center;
+}
+
+.h1_search_results {
+  color: black;
+  font-size: 24px;
+  font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+}
+
+.create_block {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15vh;
+  padding: 3px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 1px 1px 1px #5c5c5c;
+  margin: 0 auto;
+  font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  justify-content: center;
+}
+
+.about_btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}

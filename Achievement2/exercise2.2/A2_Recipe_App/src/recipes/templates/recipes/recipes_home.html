@@ -3,28 +3,39 @@
 <html lang="en">
   <head>
     <title>Recipe App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'recipes/css/styles.css'}"
+    />
+    <style type="text/css">
       body {
-        text-align: center;
-      }
-
-      .centered-image {
+        background: url("{% static 'recipes/images/welcome.jpg' %}") no-repeat
+          fixed;
+        background-size: cover;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
       }
 
-      .centered-image img {
-        width: 900px;
-        height: 600px;
+      h1 {
+        color: #bf0404;
+        font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+        text-align: center;
+        padding: 50px;
+        font-size: 50px;
+        @media (max-width: 768px) {
+          font-size: 24px;
+        }
       }
     </style>
   </head>
   <body>
-    <h1 style="text-align: center">Gourmet Genie</h1>
-    <br />
-    <div class="centered-image">
-      <img src="{% static 'recipes/images/welcome.jpg' %}" alt="home" />
-    </div>
+    <h1>Gourmet Genie</h1>
   </body>
 </html>
