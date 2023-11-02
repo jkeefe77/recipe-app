@@ -6,22 +6,27 @@
 
 .recipe_grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 17px;
-  padding: 23px 23px 23px 23px;
+  padding: 23px;
   margin: 2px;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 .grid_item {
   text-align: center;
-  background-color: #ffffff;
+  background-color: #f2f2f2;
   color: #000000;
   border-radius: 20px;
   position: relative;
   margin-top: 8px;
   margin-bottom: 8px;
   font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+}
+
+.grid_item a {
+  text-decoration: none;
+  color: black;
 }
 
 .food_images {
