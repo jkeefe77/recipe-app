@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RecipeApp: Your Recipes</title>
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'recipes\css\styles.css' %}"
+    />
+    <style type="text/css">
+      body {
+        background: url("{% static 'recipes/images/background.jpg' %}")
+          no-repeat fixed;
+        background-size: cover;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="details_modal">
+      <h2>{{object.name}}</h2>
+      <img
+        src="{{object.pic.url}}"
+        alt="recipe_photo"
+        width="200"
+        height="200"
+      />
+      <div class="details_body">
+        <div class="details_short">
+          <b>Name: </b> {{object.name}} <br />
+          <b>Description: </b> {{object.description}} <br />
+          <b>Cooking Time: </b> {{object.cooking_time}} <br />
+          <b>Difficulty: </b> {{object.calculate_difficulty}} <br />
+          <b>Ingredients: </b> {{object.ingredients}} <br />
+        </div>
+        <div class="details_long">
+          <a href="{% url 'recipes:list' %}" class="login_btn">Back</a>
+          <!-- <button onclick="goBack()" class="login_btn">Back</button> -->
+        </div>
+      </div>
+    </div>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>
