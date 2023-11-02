@@ -26,6 +26,7 @@
     <div class="details_modal">
       <h2>{{object.name}}</h2>
       <img
+        class="food_images"
         src="{{object.pic.url}}"
         alt="recipe_photo"
         width="200"
@@ -41,7 +42,6 @@
         </div>
         <div class="details_long">
           <a href="{% url 'recipes:list' %}" class="login_btn">Back</a>
-          <!-- <button onclick="goBack()" class="login_btn">Back</button> -->
         </div>
       </div>
     </div>

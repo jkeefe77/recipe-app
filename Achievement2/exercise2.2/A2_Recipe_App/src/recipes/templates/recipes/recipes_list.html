@@ -20,7 +20,7 @@
     />
     <style type="text/css">
       body {
-        background: url("{% static 'recipes/images/main-background.jpg' %}")
+        background: url("{% static 'recipes/images/background.jpg' %}")
           no-repeat fixed;
         background-size: cover;
       }
@@ -41,6 +41,7 @@
           <a href="{{object.get_absolute_url}}"> {{object.name}} </a>
         </h3>
         <img
+          class="food_images"
           src="{{object.pic.url}}"
           alt="recipe_photo"
           width="150"
