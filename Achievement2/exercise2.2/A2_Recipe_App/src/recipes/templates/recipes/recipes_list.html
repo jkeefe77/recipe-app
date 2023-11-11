@@ -18,6 +18,7 @@
       type="text/css"
       href="{% static 'recipes/css/styles.css' %}"
     />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style type="text/css">
       body {
         background: url("{% static 'recipes/images/background.jpg' %}")
@@ -30,10 +31,69 @@
         color: #d6d6d6;
         font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
       }
+
+      .nav_bar {
+			position:fixed;
+			top: 0;
+      left: 0;
+      right: 0;
+			height: 4em;
+		  display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			background-color: #404040;
+		}
+
+    .nav_bar a {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.navbar-brand a {
+  color: white;
+}
+    .menu-toggle {
+      padding: 0.25rem 0.75rem;
+      font-size: 1.25rem;
+      color: "#ffffff";
+    }
+
+    .menu-toggle:hover {
+      text-decoration: none;
+    }
+    .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #404040;
+    background-color: white;
+}
+
+a:not([href]):not([tabindex]) {
+    color: white;
+    text-decoration: none;
+}
+
+a:not([href]):not([tabindex]):hover {
+  color: white;
+}
+
     </style>
   </head>
 
   <body>
+    <div class="navbar navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand">Gourmet Genie</a>
+    </div>
+    <div class="collapse" id="navContent">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'success' %}">Logout</a>
+        </li>
+      </ul>
+      </div>
     <div class="recipe_grid">
       {% for object in object_list %}
       <div class="grid_item">
@@ -51,5 +111,8 @@
       </div>
       {% endfor %}
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </body>
 </html>

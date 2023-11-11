@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- basic html design -->
+<html>
+  <title>Recipe App</title>
+  <style>
+    body {
+      background: url("{% static 'recipes/images/background.jpg' %}") no-repeat
+        fixed;
+      background-size: cover;
+      position: relative;
+    }
+    h1 {
+      color: black;
+    }
+    button {
+      background-color: wheat;
+      color: black;
+    }
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      font-family: "Roboto Mono", sans-serif;
+    }
+    .item {
+      padding: 5px;
+      width: 50%;
+      height: 40%;
+      margin: 10px;
+      color: black;
+      font-weight: bold;
+      font-size: 1.5em;
+      text-align: center;
+    }
+
+    .item a {
+      color: #bf5a50;
+      text-decoration: none;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="item">
+        <h1>Thanks for cooking with us!</h1>
+        <br />
+        <br />
+        Gourmet Genie
+        <a href="{% url 'login' %}" style="font-size: 1em">Login here</a>
+      </div>
+    </div>
+  </body>
+</html>
