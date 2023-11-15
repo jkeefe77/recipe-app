@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.template import RequestContext
 
 # Django authentication libraries
 from django.contrib.auth import authenticate, login, logout
@@ -29,9 +28,8 @@ def login_view(request):
             # use Django authenticate function to validate the user
             user = authenticate(username=username, password=password)
             if user is not None:  # if user is authenticated
-                # then use pre-defined Django function to login
-                login(request, user)
-                return redirect("sales:records")  # & send the user to desired page
+                login(request, user)  # then use pre-defined Django function to login
+                return redirect("sales:records")  # and send the user to desired page
         else:  # in case of error
             error_message = "ooops.. something went wrong"  # print error message
 
@@ -40,8 +38,9 @@ def login_view(request):
         "form": form,  # send the form data
         "error_message": error_message,  # and the error_message
     }
-    # load the login page using "context" information
-    return render(request, "auth/login.html", context)
+    return render(
+        request, "auth/login.html", context
+    )  # load the login page using "context" information
 
 
 # define a function view called logout_view that takes a request from user
