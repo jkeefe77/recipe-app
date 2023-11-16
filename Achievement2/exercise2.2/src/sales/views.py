@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import SalesSearchForm
 from .models import Sale
 import pandas as pd
+from .utils import get_bookname_from_id, get_chart
 
 # from .utils import get_bookname_from_id, get_chart
 from django.contrib.auth.decorators import login_required  # to protect function views
@@ -43,26 +44,26 @@ def records(request):
 
         # The following block is to get introduced to querysets
         # display in terminal - needed for debugging during development only
-        print(book_title, chart_type)
+        # print(book_title, chart_type)
 
-        print("Exploring querysets:")
-        print("Output of Sale.objects.all()")
-        qs = Sale.objects.all()
-        print(qs)
+        # print("Exploring querysets:")
+        # print("Output of Sale.objects.all()")
+        # qs = Sale.objects.all()
+        # print(qs)
 
-        print("Output of Sale.objects.filter(book__name=book_title)")
-        qs = Sale.objects.filter(book__name=book_title)
-        print(qs)
+        # print("Output of Sale.objects.filter(book__name=book_title)")
+        # qs = Sale.objects.filter(book__name=book_title)
+        # print(qs)
 
-        print("Output of qs.values()")
-        print(qs.values())
+        # print("Output of qs.values()")
+        # print(qs.values())
 
-        print("Output of qs.values_list()")
-        print(qs.values_list())
+        # print("Output of qs.values_list()")
+        # print(qs.values_list())
 
-        print("Output of Sale.objects.get(id=1)")
-        obj = Sale.objects.get(id=1)
-        print(obj)
+        # print("Output of Sale.objects.get(id=1)")
+        # obj = Sale.objects.get(id=1)
+        # print(obj)
 
     # pack up data to be sent to template in the context dictionary
     context = {"form": form, "sales_df": sales_df, "chart": chart}

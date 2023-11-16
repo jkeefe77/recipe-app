@@ -1,5 +1,7 @@
+import logging
 from django.db import models
 from django.shortcuts import reverse
+from django.conf import settings
 
 # Create your models here.
 
@@ -28,19 +30,45 @@ class Recipe(models.Model):
         default=BEGINNER,
     )
 
-    def save(self, *args, **kwargs):
-        force_insert = kwargs.pop("force_insert", False)
-        super(Recipe, self).save(*args, **kwargs)
-        # Adjust these thresholds as needed based on your criteria
-        if self.cooking_time <= 30 and len(self.ingredients.split()) <= 5:
-            self.difficulty = self.BEGINNER
-        elif self.cooking_time <= 60 and len(self.ingredients.split()) <= 10:
-            self.difficulty = self.INTERMEDIATE
+    def __str__(self):
+        return f"""
+        {self.name}
+        Ingredients: {self.ingredients}
+        Cooking Time: {self.cooking_time} minutes
+        Difficulty: {self.calc_difficulty()}
+        """
+
+    def calc_difficulty(self):
+        difficulty_levels = {
+            "Easy": "Easy",
+            "Medium": "Medium",
+            "Intermediate": "Intermediate",
+            "Hard": "Hard",
+        }
+
+        ingredients_list = self.ingredients.split(", ")
+        num_ingredients = len(ingredients_list)
+
+        if self.cooking_time < 10:
+            if num_ingredients < 4:
+                difficulty = difficulty_levels.get("Easy")
+            else:
+                difficulty = difficulty_levels.get("Medium")
         else:
-            self.difficulty = self.HARD
+            if num_ingredients < 4:
+                difficulty = difficulty_levels.get("Intermediate")
+            else:
+                difficulty = difficulty_levels.get("Hard")
+
+            # Log the difficulty level
+            logging.info(f"Recipe difficulty for {self.name}: {difficulty}")
+
+        return difficulty
+
+    def save(self, *args, **kwargs):
+        self.name = self.name.title()
+        self.ingredients = self.ingredients.title()
+        super(Recipe, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("recipes:detail", kwargs={"pk": self.pk})
-
-    def __str__(self):
-        return str(self.name)

@@ -26,34 +26,12 @@
         background-size: cover;
       }
 
-      h1,
+      h1, h2,
       h3 {
         color: #d6d6d6;
         font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
       }
 
-      .nav_bar {
-			position:fixed;
-			top: 0;
-      left: 0;
-      right: 0;
-			height: 4em;
-		  display: flex;
-			align-items: center;
-			justify-content: flex-end;
-			background-color: #404040;
-		}
-
-    .nav_bar a {
-    color: white;
-    cursor: pointer;
-    text-decoration: none;
-    margin-left: 10px;
-}
-
-.navbar-brand a {
-  color: white;
-}
     .menu-toggle {
       padding: 0.25rem 0.75rem;
       font-size: 1.25rem;
@@ -63,10 +41,19 @@
     .menu-toggle:hover {
       text-decoration: none;
     }
-    .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: #404040;
-    background-color: white;
-}
+    .nav-pills {
+      flex-direction: column;
+    } 
+    .nav-pills .nav-link.active {
+    color: #fff;
+    background-color: #3498db;
+    margin-bottom: 5px;
+    max-width: 100px;
+    }
+
+  /* .nav-pills .show>.nav-link  {
+
+  } */
 
 a:not([href]):not([tabindex]) {
     color: white;
@@ -77,10 +64,29 @@ a:not([href]):not([tabindex]):hover {
   color: white;
 }
 
-    </style>
-  </head>
+.navbar-container {
+  position: relative;
+  
+}
 
+.center-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh; /* Adjust the height as needed */
+}
+
+.graph-container {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+
+ </style>
+  </head>
   <body>
+    <div class="navbar-container">
     <div class="navbar navbar-dark bg-dark">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -92,14 +98,59 @@ a:not([href]):not([tabindex]):hover {
         <li class="nav-item">
           <a class="nav-link active" href="{% url 'success' %}">Logout</a>
         </li>
+        <li class="nav-item">
+          <!-- Add link to recipes_list.html -->
+          <a class="nav-link active" href="{% url 'recipes:list' %}">Recipes List</a>
+      </li>
       </ul>
       </div>
+      </div>
+      <h1> Search for Recipes</h1>
+      <hr>
+      <div class="center-form">
+        <form
+          action=""
+          method="post"
+          id="recipe-search-form"
+          enctype="multipart/form-data"
+        >
+          <input
+            class="recipe-input"
+            type="text"
+            name="recipe_name"
+            placeholder="Search by Recipe Name"
+          />
+          <input
+            class="recipe-input"
+            type="text"
+            name="ingredients"
+            placeholder="Search by ingredient"
+          />
+
+          {% csrf_token %}
+          <button type="submit" class="btn search-button"
+            style="background-color: #3498db; color: #ffffff;">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </form>
+        </div>
+        <br>
+        <div class="graph-container">
+          {% if chart %}
+
+          <img src="data:image/png;base64,{{ chart|safe }}" />
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
     <div class="recipe_grid">
       {% for object in object_list %}
       <div class="grid_item">
-        <h3>
+        <h2>
           <a href="{{object.get_absolute_url}}"> {{object.name}} </a>
-        </h3>
+        </h2>
         <a href="{{object.get_absolute_url}}">
           <img
           class="food_images"

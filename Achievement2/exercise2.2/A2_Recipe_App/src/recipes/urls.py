@@ -1,14 +1,15 @@
-from django.urls import path
-from .views import recipes_home
+from django.urls import path, include
+from .views import HomeView
 from .views import RecipeListView
 from .views import RecipeDetailView
 from . import views
 
+
 app_name = "recipes"
 
 urlpatterns = [
-    path("", recipes_home, name="home"),
-    path('recipes/', views.recipe_list, name='recipe-list'),
+    path("home/", HomeView.as_view(), name="home"),
+    path("recipes/", RecipeListView.as_view(), name="recipes"),
     path("list/", RecipeListView.as_view(), name="list"),
     path("list/<pk>", RecipeDetailView.as_view(), name="detail"),
 ]
