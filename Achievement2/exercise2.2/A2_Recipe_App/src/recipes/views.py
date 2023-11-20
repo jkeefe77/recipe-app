@@ -20,7 +20,7 @@ from io import BytesIO
 
 class HomeView(LoginRequiredMixin, ListView):
     model = Recipe
-    template_name = "recipes/recipes_home.html"
+    template_name = "recipes/recipes_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -120,4 +120,4 @@ class RecipeListView(ListView):
         return render(request, "recipes/recipes_list.html", {"chart": chart})
 
     def recipes_home(request):
-        return render(request, "recipes/recipes_home.html")
+        return render(request, "recipes/recipes_list.html")
