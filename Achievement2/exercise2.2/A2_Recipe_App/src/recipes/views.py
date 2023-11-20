@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.contrib import messages
-from .models import Recipe
+from .models import Recipe, CustomUser
 from django.urls import reverse
+import random
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .forms import RecipeForm, RecipeSearchForm

@@ -1,7 +1,8 @@
 from django.test import TestCase
+from django.urls import reverse
 
 from recipes.forms import RecipeSearchForm
-from recipes.models import Recipe
+from recipes.models import Recipe, CustomUser
 
 # Create your tests here.
 
@@ -59,8 +60,8 @@ class RecipeModelTest(TestCase):
 class RecipeSearchFormTestCase(TestCase):
     def test_valid_form(self):
         data = {
-            "recipe_name": "Spaghetti",
-            "ingredients": "pasta, sauce, meat",
+            "recipe_name": "Pizza",
+            "ingredients": "dough, sauce, cheese",
         }
         form = RecipeSearchForm(data=data)
         self.assertTrue(form.is_valid())
@@ -84,3 +85,30 @@ class RecipeSearchFormTestCase(TestCase):
         }
         form = RecipeSearchForm(data=data)
         self.assertTrue(form.is_valid())
+
+
+class CustomUserModelTest(TestCase):
+    def setUp(self):
+        self.user = CustomUser.objects.create_user(
+            username="testuser", password="testpass"
+        )
+
+    def test_user_creation(self):
+        self.assertTrue(self.user.check_password("testpass"))
+
+    def test_user_str(self):
+        self.assertEqual(str(self.user), "testuser")
+
+    def test_user_get_absolute_url(self):
+        expected_url = reverse(
+            "recipes:profile", kwargs={"username": self.user.username}
+        )
+        self.assertEqual(self.user.get_absolute_url(), expected_url)
+
+    def test_user_bio_field(self):
+        self.user.bio = "this is a test bio"
+        self.assertEqual(self.user.bio, "this is a test bio")
+
+    def test_user_pic_field(self):
+        self.user.pic = "profile_pics/test.jpg"
+        self.assertEqual(self.user.pic, "profile_pics/test.jpg")

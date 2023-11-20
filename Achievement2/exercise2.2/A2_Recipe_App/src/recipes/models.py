@@ -1,7 +1,8 @@
 import logging
 from django.db import models
+from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.shortcuts import reverse
-from django.conf import settings
+
 
 # Create your models here.
 
@@ -72,3 +73,29 @@ class Recipe(models.Model):
 
     def get_absolute_url(self):
         return reverse("recipes:detail", kwargs={"pk": self.pk})
+
+
+class CustomUser(AbstractUser):
+    # Add custom fields to your user model
+    pic = models.ImageField(
+        upload_to="profile_pics", blank=True, null=True, default="no_picture.jpg"
+    )
+    bio = models.TextField(blank=True, null=True)
+    fav_recipes = models.ManyToManyField(
+        Recipe, blank=True, related_name="users_favorites"
+    )
+    groups = models.ManyToManyField(
+        Group, verbose_name="groups", blank=True, related_name="customuser_groups"
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        verbose_name="user permissions",
+        blank=True,
+        related_name="customuser_permissions",
+    )
+
+    def __str__(self):
+        return self.username
+
+    def get_absolute_url(self):
+        return reverse("recipes:profile", kwargs={"username": self.username})

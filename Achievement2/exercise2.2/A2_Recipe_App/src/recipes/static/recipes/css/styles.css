@@ -10,7 +10,6 @@
 .food_images {
   max-width: 80%;
   border-radius: 6px;
-
 }
 
 @media screen and (max-width: 768) {
