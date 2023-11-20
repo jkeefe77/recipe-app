@@ -49,6 +49,7 @@
     background-color: #3498db;
     margin-bottom: 5px;
     max-width: 100px;
+    font-weight: 600;
     }
 
   /* .nav-pills .show>.nav-link  {
@@ -58,6 +59,7 @@
 a:not([href]):not([tabindex]) {
     color: white;
     text-decoration: none;
+    font-size: 24px;
 }
 
 a:not([href]):not([tabindex]):hover {
@@ -80,6 +82,33 @@ a:not([href]):not([tabindex]):hover {
   display: flex;
   justify-content: center;
   align-items: center
+}
+
+.grid_item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: aliceblue;
+  
+}
+
+.grid_item a {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  overflow: auto;
+  text-decoration: none;
+  color: black;
+}
+
+@media screen and (max-width:768px) {
+  .grid_item a {
+    font-size: 1rem;
+  }
+  .grid_item {
+    border-radius: 20px;
+  }
 }
 
 
@@ -149,7 +178,7 @@ a:not([href]):not([tabindex]):hover {
       {% for object in object_list %}
       <div class="grid_item">
         <h2>
-          <a href="{{object.get_absolute_url}}"> {{object.name}} </a>
+          <a href="{{object.get_absolute_url}}" class="recipe_name"> {{object.name}} </a>
         </h2>
         <a href="{{object.get_absolute_url}}">
           <img

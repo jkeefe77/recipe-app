@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-# Create your tests here.
-from .models import Recipe
+from recipes.forms import RecipeSearchForm
+from recipes.models import Recipe
 
 # Create your tests here.
 
@@ -54,3 +54,33 @@ class RecipeModelTest(TestCase):
 
         # Ensure that the description does not exceed 500 characters
         self.assertLessEqual(len(recipe.description), 500)
+
+
+class RecipeSearchFormTestCase(TestCase):
+    def test_valid_form(self):
+        data = {
+            "recipe_name": "Spaghetti",
+            "ingredients": "pasta, sauce, meat",
+        }
+        form = RecipeSearchForm(data=data)
+        self.assertTrue(form.is_valid())
+
+    def test_empty_form(self):
+        # Both fields are not required, so an empty form is valid
+        data = {}
+        form = RecipeSearchForm(data=data)
+        self.assertTrue(form.is_valid())
+
+    def test_partial_form(self):
+        # Either field can be empty
+        data = {
+            "recipe_name": "Pizza",
+        }
+        form = RecipeSearchForm(data=data)
+        self.assertTrue(form.is_valid())
+
+        data = {
+            "ingredients": "dough, cheese, sauce",
+        }
+        form = RecipeSearchForm(data=data)
+        self.assertTrue(form.is_valid())
