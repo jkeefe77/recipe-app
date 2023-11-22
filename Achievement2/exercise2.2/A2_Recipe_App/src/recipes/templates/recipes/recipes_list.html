@@ -31,6 +31,8 @@
         color: #404040;
         font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
         font-weight: 600;
+        display: flex;
+        justify-content: center;
       }
 
     .menu-toggle {
@@ -79,23 +81,34 @@ a:not([href]):not([tabindex]):hover {
   height: 10vh; /* Adjust the height as needed */
 }
 
+.graph-container-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 .graph-container {
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  max-width: 100%;
 }
 
 .grid_item {
-  display: flex;
-  flex-direction: column;
   padding: 10px;
-  border-radius: 10px;
   background-color: #BFBCBA;
-  
+  margin: 10px;
+  flex-wrap: wrap;
+  text-align: center;
+  max-width: 200px;
+  border-radius: 10px;
+}
+
+.grid_item h2 {
+  margin-bottom: 10px;
 }
 
 .grid_item a {
-  display: block;
+  display: flex;
   font-size: 1.5rem;
   font-weight: 600;
   overflow: auto;
@@ -103,13 +116,43 @@ a:not([href]):not([tabindex]):hover {
   color: black;
 }
 
+.food_images {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 5px;
+}
+
 @media screen and (max-width:768px) {
+  
   .grid_item a {
-    font-size: 1rem;
+    display: flex;
+    font-size: 2rem;
+    align-items: center;
   }
   .grid_item {
     border-radius: 20px;
+    flex: 0 0 calc(90% - 20px);
   }
+  .graph-container {
+    max-width: 90%;
+}
+.food_images {
+  align-items: center;
+  display: flex;
+}
+.col-lg-6 {
+  margin-top: 20px;
+}
+}
+  .graph-container img {
+        max-width: 100%; /* Adjust as needed for smaller screens */
+        height: auto;
+        align-items: center;
+}
+
+.search-button {
+  margin-top: 5px;
 }
 
 
@@ -165,32 +208,31 @@ a:not([href]):not([tabindex]):hover {
         </form>
         </div>
         <br>
+        <div class="graph-container-wrapper">
         <div class="graph-container">
           {% if chart %}
-
-          <img src="data:image/png;base64,{{ chart|safe }}" />
-
-          {% endif %}
+        <img src="data:image/png;base64,{{ chart|safe }}" />
+      {% endif %}
         </div>
       </div>
     </div>
   </div>
-    <div class="recipe_grid">
+  <div class="grid_wrapper">
+    <div class="d-grid.gap-2.col-6.mx-auto">
       {% for object in object_list %}
-      <div class="grid_item">
+      <div class="grid_item" style="text-align: center;">
         <h2>
           <a href="{{object.get_absolute_url}}" class="recipe_name"> {{object.name}} </a>
-        </h2>
+        </h2><br/>
         <a href="{{object.get_absolute_url}}">
           <img
           class="food_images"
           src="{{object.pic.url}}"
           alt="recipe_photo"
-          width="150"
-          height="200"
         />
       </div>
       {% endfor %}
+    </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
