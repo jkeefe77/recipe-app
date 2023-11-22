@@ -3,10 +3,13 @@
 <!-- basic html design -->
 <html>
   <title>Recipe App</title>
+
   <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Handjet:wght@600&family=League+Spartan:wght@900&family=Limelight&family=Nunito+Sans:opsz,wght@6..12,300&family=Playfair+Display:wght@500&family=Roboto+Mono&display=swap');
+    
     body {
-      background: url("{% static 'recipes/images/background.jpg' %}") no-repeat
-        fixed;
+      background: url("{% static 'recipes/images/background.jpg' %}") no-repeat fixed;
       background-size: cover;
       position: relative;
       margin: 0;
@@ -24,7 +27,14 @@
       width: 100%;
     }
     h1 {
-      color: black;
+color: black;
+font-family: 'Bungee Spice', sans-serif;
+font-family: 'Handjet', sans-serif;
+font-family: 'League Spartan', sans-serif;
+font-family: 'Limelight', sans-serif;
+font-family: 'Nunito Sans', sans-serif;
+font-family: 'Playfair Display', serif;
+font-family: 'Roboto Mono', monospace;
     }
     button {
       background: #d9d9d9;
@@ -51,6 +61,29 @@
       font-size: 1.5em;
       text-align: center;
       background: rgba(255, 255, 255, 0.8);
+    }
+
+    p {
+font-family: 'Bungee Spice', sans-serif;
+font-family: 'Handjet', sans-serif;
+font-family: 'League Spartan', sans-serif;
+font-family: 'Limelight', sans-serif;
+font-family: 'Nunito Sans', sans-serif;
+font-family: 'Playfair Display', serif;
+font-family: 'Roboto Mono', monospace;
+    }
+
+    .button {
+      font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+        font-size: 18px;
+        background-color: #404040;
+        padding: 10px;
+        text-align: center;
+        border-radius: 10px;
+        border: 2px;
+        color: #f2f2f2;
+        cursor: pointer;
+        text-decoration: none;
     }
 
     @media (max-width: 768px) {
@@ -137,7 +170,7 @@
             {% endif %}
           </div>
           <div class="redirect-buttons">
-            <button type="submit" class="btn btn-primary signup-btn">
+            <button type="submit" class="button">
               Sign Up
             </button>
           </div>
@@ -155,7 +188,7 @@
         {% if error_message %} {{error_message}} {% endif %}
         <form action="" method="POST">
           {% csrf_token %} {{form}}
-          <button type="submit">Login</button>
+          <button type="submit" class="button">Login</button>
         </form>
       </div>
     </div>

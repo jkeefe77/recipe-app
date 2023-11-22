@@ -13,6 +13,10 @@
       type="text/css"
       href="{% static 'recipes\css\styles.css' %}"
     />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
     <style type="text/css">
       body {
         background: url("{% static 'recipes/images/background.jpg' %}")
@@ -40,7 +44,7 @@
       .login_btn {
         font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
         font-size: 18px;
-        background-color: darkolivegreen;
+        background-color: #404040;
         padding: 10px;
         text-align: center;
         border-radius: 10px;
@@ -49,10 +53,80 @@
         cursor: pointer;
         text-decoration: none;
       }
+
+      .menu-toggle {
+        padding: 0.25rem 0.75rem;
+        font-size: 1.25rem;
+        color: "#ffffff";
+      }
+
+      .menu-toggle:hover {
+        text-decoration: none;
+      }
+      .nav-pills {
+        flex-direction: column;
+      }
+      .nav-pills .nav-link.active {
+        color: #fff;
+        background-color: #3498db;
+        margin-bottom: 5px;
+        max-width: 100px;
+        font-weight: 600;
+      }
+
+      a:not([href]):not([tabindex]) {
+        color: white;
+        text-decoration: none;
+        font-size: 24px;
+      }
+
+      a:not([href]):not([tabindex]):hover {
+        color: white;
+      }
+
+      .navbar-container {
+        position: relative;
+      }
+
+      @media screen and (max-width: 768px) {
+        .food_images {
+          align-items: center;
+          display: flex;
+        }
+      }
     </style>
   </head>
-
   <body>
+    <div class="navbar-container">
+      <div class="navbar navbar-dark bg-dark">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navContent"
+          aria-controls="navContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand">Gourmet Genie</a>
+      </div>
+      <div class="collapse" id="navContent">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'recipes:list' %}"
+              >Recipes List</a
+            >
+          </li>
+          <li class="nav-item">
+            <!-- Add link to recipes_list.html -->
+            <a class="nav-link active" href="{% url 'success' %}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <h1>Recipe Details</h1>
     <div class="details_modal">
       <h2>{{object.name}}</h2>
       <img
@@ -81,5 +155,8 @@
         window.history.back();
       }
     </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>
