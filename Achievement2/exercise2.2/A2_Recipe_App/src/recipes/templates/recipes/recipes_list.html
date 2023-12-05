@@ -1,4 +1,6 @@
 {% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -120,7 +122,17 @@ a:not([href]):not([tabindex]):hover {
   display: flex;
   align-items: center;
   width: 100%;
-  border-radius:
+  border-radius: 10px;
+}
+
+.grid_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  align-items: stretch;
+  grid-gap: 20px;
+  margin: 2px;
+  margin-top: 50px;
+  align-items: center;
 }
 
 @media screen and (max-width:768px) {
@@ -141,9 +153,7 @@ a:not([href]):not([tabindex]):hover {
   align-items: center;
   display: flex;
 }
-.col-lg-6 {
-  margin-top: 20px;
-}
+
 }
   .graph-container img {
         max-width: 100%; /* Adjust as needed for smaller screens */
@@ -169,6 +179,10 @@ a:not([href]):not([tabindex]):hover {
     <div class="collapse" id="navContent">
         <ul class="nav nav-pills">
           <li class="nav-item">
+            <a class="nav-link active" href="{% url 'recipes:profile' username=request.user.username %}"
+              >Profile</a
+            >
+          <li class="nav-item">
             <a class="nav-link active" href="{% url 'recipes:list' %}"
               >Recipes List</a
             >
@@ -184,7 +198,7 @@ a:not([href]):not([tabindex]):hover {
       <hr>
       <div class="center-form">
         <form
-          action=""
+          action="{% url 'recipes:list' %}"
           method="post"
           id="recipe-search-form"
           enctype="multipart/form-data"
@@ -220,7 +234,6 @@ a:not([href]):not([tabindex]):hover {
     </div>
   </div>
   <div class="grid_wrapper">
-    <div class="d-grid.gap-2.col-6.mx-auto">
       {% for object in object_list %}
       <div class="grid_item" style="text-align: center;">
         <h2>

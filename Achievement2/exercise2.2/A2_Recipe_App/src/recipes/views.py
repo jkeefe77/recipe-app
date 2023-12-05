@@ -1,18 +1,20 @@
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, DetailView, CreateView
 from django.contrib import messages
 from .models import Recipe, CustomUser
 from django.urls import reverse
 import random
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import RecipeForm, RecipeSearchForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import RecipeSearchForm, RecipeForm
 from django.contrib.auth.models import User
 import pandas as pd
 from django.db.models import Q
 import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
+from django.conf import settings
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -121,3 +123,94 @@ class RecipeListView(ListView):
 
     def recipes_home(request):
         return render(request, "recipes/recipes_list.html")
+
+
+class AddRecipe(LoginRequiredMixin, CreateView):
+    model = Recipe
+    template_name = "recipes/add_recipe.html"
+    form_class = RecipeForm
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["MEDIA_URL"] = settings.MEDIA_URL
+        return context
+
+
+@login_required
+def delete_recipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+
+    if request.user == recipe.author:
+        if request.method == "POST":
+            # Check for a confirmation parameter sent via POST
+            if request.POST:
+                recipe.delete()
+                return redirect("recipes:recipe")
+            else:
+                return redirect("recipes:detail", pk=recipe_id)
+    return redirect("recipes:recipe")
+
+
+@login_required
+def edit_recipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+
+    if request.user == recipe.author:
+        if request.method == "POST":
+            recipe_form = RecipeForm(request.POST, instance=recipe)
+            if recipe_form.is_valid():
+                recipe_form.save()
+                return redirect("recipes:detail", pk=recipe_id)
+
+    return redirect("recipes:detail", pk=recipe_id)
+
+
+@login_required
+def faved_recipe(request, recipe_id):
+    user = request.user
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+
+    if user.fav_recipes.filter(pk=recipe_id).exists():
+        user.fav_recipes.remove(recipe)
+        is_liked = False
+    else:
+        user.fav_recipes.add(recipe)
+        is_liked = True
+
+    response_data = {
+        "is_liked": is_liked,
+    }
+
+    return JsonResponse(response_data)
+
+
+@login_required
+def update_profile_picture(request, username):
+    if request.method == "POST":
+        profile_pic = request.FILES["profile_pic"]
+        request.user.pic = profile_pic
+        request.user.save()
+        print(request.FILES)
+        return redirect("recipes:profile", username=request.user.username)
+    else:
+        return redirect("recipes:profile", username=request.user.username)
+
+
+class Profile(LoginRequiredMixin, DetailView):
+    model = CustomUser
+    template_name = "recipes/profile.html"
+    context_object_name = "user"
+    slug_field = "username"
+    slug_url_kwarg = "username"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.object
+        created_recipes = Recipe.objects.filter(author=user)
+        context["created_recipes"] = created_recipes
+        context["MEDIA_URL"] = settings.MEDIA_URL
+        return context
