@@ -1,7 +1,8 @@
 import logging
-from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group, Permission
-from django.shortcuts import reverse
+from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.

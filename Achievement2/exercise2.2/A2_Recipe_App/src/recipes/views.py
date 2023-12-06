@@ -7,7 +7,7 @@ import random
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import RecipeSearchForm, RecipeForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import CustomUser
 import pandas as pd
 from django.db.models import Q
 import matplotlib.pyplot as plt
