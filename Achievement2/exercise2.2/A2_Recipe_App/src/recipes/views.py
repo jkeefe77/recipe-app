@@ -2,12 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib import messages
 from .models import Recipe, CustomUser
-from django.urls import reverse
 import random
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import RecipeSearchForm, RecipeForm
-from django.contrib.auth.models import CustomUser
 import pandas as pd
 from django.db.models import Q
 import matplotlib.pyplot as plt

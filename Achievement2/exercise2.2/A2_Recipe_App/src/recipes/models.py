@@ -100,3 +100,4 @@ class CustomUser(AbstractUser):
 
     def get_absolute_url(self):
         return reverse("recipes:profile", kwargs={"username": self.username})
+    
