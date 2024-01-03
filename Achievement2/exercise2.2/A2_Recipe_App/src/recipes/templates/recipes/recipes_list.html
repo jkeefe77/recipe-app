@@ -126,7 +126,9 @@ a:not([href]):not([tabindex]):hover {
 }
 
 .grid_wrapper {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   align-items: stretch;
   grid-gap: 20px;
@@ -162,7 +164,9 @@ a:not([href]):not([tabindex]):hover {
 }
 
 .search-button {
-  margin-top: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 5px;
 }
 
 

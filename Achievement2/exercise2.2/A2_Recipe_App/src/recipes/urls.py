@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import HomeView
-from .views import RecipeListView, RecipeDetailView, HomeView, Profile
-from . import views
+from .views import RecipeListView, RecipeDetailView, Profile
+
 
 
 app_name = "recipes"
@@ -12,9 +12,4 @@ urlpatterns = [
     path("list/", RecipeListView.as_view(), name="list"),
     path("list/<pk>", RecipeDetailView.as_view(), name="detail"),
     path("profile/<slug:username>/", Profile.as_view(), name="profile"),
-    path(
-        "profile/<slug:username>/update/",
-        views.update_profile_picture,
-        name="update_profile_picture",
-    ),
 ]

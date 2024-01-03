@@ -25,7 +25,7 @@
       }
 
       .details_modal {
-        width: 40%;
+        width: 20%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -39,6 +39,11 @@
         font-size: 16px;
         text-align: center;
         justify-content: center;
+      }
+      @media screen and (max-width: 768px) {
+        .details_modal {
+          width: 90%; /* Adjust the width for smaller screens */
+        }
       }
 
       .login_btn {
@@ -127,6 +132,7 @@
       </div>
     </div>
     <h1>Recipe Details</h1>
+    <br />
     <div class="details_modal">
       <h2>{{object.name}}</h2>
       <img
