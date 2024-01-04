@@ -3,7 +3,7 @@ from .models import Recipe, CustomUser
 
 
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ("name", "ingredients", "cooking_time", "pic")
+    list_display = ("name", "ingredients", "cooking_time", "author")
 
     def has_delete_permission(self, request, obj=None):
         # Check if the user has permission to delete the recipe

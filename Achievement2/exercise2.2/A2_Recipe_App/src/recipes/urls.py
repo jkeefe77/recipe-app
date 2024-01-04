@@ -1,6 +1,5 @@
-from django.urls import path, include
-from .views import HomeView
-from .views import RecipeListView, RecipeDetailView, Profile
+from django.urls import path
+from .views import HomeView, RecipeListView, RecipeDetailView, Profile
 
 
 

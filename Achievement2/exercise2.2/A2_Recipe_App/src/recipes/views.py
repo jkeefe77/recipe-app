@@ -1,21 +1,24 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView
-from django.contrib import messages
-from .models import Recipe, CustomUser
-import random
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import RecipeSearchForm, RecipeForm
-import pandas as pd
-from django.db.models import Q
-import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
+
+import matplotlib
+import matplotlib.pyplot as plt
 from django.conf import settings
+from django.contrib import messages
+from django.db.models import Q
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic import CreateView, DetailView, ListView
 
+from .models import CustomUser, Recipe
 
-# Create your views here.
+matplotlib.use("Agg")
+import random
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from .forms import RecipeForm, RecipeSearchForm
 
 
 class HomeView(LoginRequiredMixin, ListView):
@@ -30,6 +33,7 @@ class HomeView(LoginRequiredMixin, ListView):
         else:
             random_recipes = list(all_recipes)
         context["random_suggestions"] = random_recipes
+        context["MEDIA_URL"] = settings.MEDIA_URL
         return context
 
 
@@ -42,6 +46,7 @@ class RecipeDetailView(LoginRequiredMixin, DetailView):
         recipe = self.object
         difficulty = recipe.calc_difficulty()
         context["difficulty"] = difficulty
+        context["MEDIA_URL"] = settings.MEDIA_URL
         return context
 
 
@@ -60,6 +65,7 @@ class RecipeListView(ListView):
         y = [recipe.cooking_time for recipe in all_recipes]
         chart = self.get_plot(x, y)
         context["chart"] = chart
+        context["MEDIA_URL"] = settings.MEDIA_URL
 
         return context
 
@@ -78,6 +84,7 @@ class RecipeListView(ListView):
         image_png = buffer.getvalue()
         graph = base64.b64encode(image_png).decode("utf-8")
         buffer.close()
+        
         return graph
 
     def post(self, request, *args, **kwargs):
@@ -112,15 +119,12 @@ class RecipeListView(ListView):
             chart = self.get_plot(x, y)
             context["chart"] = chart
 
-            return render(self.request, "recipes/recipes_list.html", context)
+        return render(self.request, "recipes/recipes_list.html", context)
 
     def graph_view(request):
         # You can access the chart within the context here
         chart = request.context["chart"]
         return render(request, "recipes/recipes_list.html", {"chart": chart})
-
-    def recipes_home(request):
-        return render(request, "recipes/recipes_list.html")
 
 
 class AddRecipe(LoginRequiredMixin, CreateView):
@@ -204,11 +208,8 @@ class Profile(LoginRequiredMixin, DetailView):
     context_object_name = "user"
     slug_field = "username"
     slug_url_kwarg = "username"
+    
+    def get_object(self, queryset=None):
+        return get_object_or_404(CustomUser, username=self.kwargs['username'])
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = self.object
-        created_recipes = Recipe.objects.filter(author=user)
-        context["created_recipes"] = created_recipes
-        context["MEDIA_URL"] = settings.MEDIA_URL
-        return context
+   
