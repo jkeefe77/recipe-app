@@ -165,6 +165,24 @@ a:not([href]):not([tabindex]):hover {
   margin-bottom: 15px;
   padding: 5px;
 }
+
+.rofile-container{
+            background-color: #F8F9FA;
+            border-radius: 10px;
+        }
+
+        .profile-header {
+            border-bottom: none;
+        }
+
+        .modal-title {
+            color: #404040;
+            font-weight: 600;
+        }
+
+        .profile-text {
+            color: #404040;
+        }
     </style>
   </head>
   <body>
@@ -191,6 +209,45 @@ a:not([href]):not([tabindex]):hover {
           </ul>
         </div>
       </div>
+      <!-- <-- Favorite Recipes Grid --> 
+      <div class="grid_wrapper">
+          {% for recipe in user.fav_recipes.all %}
+          <div class="grid_item">
+              <h2>{{ recipe.name }}</h2>
+              <div class="food_images">
+                  <img src="{{ recipe.pic.url }}" alt="{{ recipe.name }}">
+              </div>
+              <p>{{ recipe.description }}</p>
+              <!-- Add more details or links if needed -->
+          </div>
+          {% endfor %}
+      </div>
+      
+  <!-- Profile Container -->
+  <div class="container profile-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="profile-header">
+                My Profile
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="profile-text">
+                <p>Username: {{ user.username }}</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="profile-text">
+                <h6>Favorite Recipes:</h6>
+                <ul>
+                    {% for recipe in user.fav_recipes.all %}
+                    <li>{{ recipe.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
