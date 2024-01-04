@@ -36,7 +36,7 @@
         box-shadow: 1px 1px 1px #5c5c5c;
         margin: 0 auto;
         font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
-        font-size: 16px;
+        font-size: 24px;
         text-align: center;
         justify-content: center;
       }
@@ -99,6 +99,24 @@
           display: flex;
         }
       }
+      .heart-btn {
+    font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
+    font-size: 24px;
+    background-color: transparent; /* Set background to transparent */
+    padding: 18px;
+    text-align: center;
+    border: none; /* Remove border */
+    color: #ff004c; /* Set color to red or desired heart color */
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 10px; /* Add margin to separate it from login_btn */
+  }
+
+  .heart-btn::before {
+    content: "\2665"; /* Unicode for heart symbol */
+    font-size: 24px;
+  }
     </style>
   </head>
   <body>
@@ -123,6 +141,12 @@
             <a class="nav-link active" href="{% url 'recipes:list' %}"
               >Home</a
             >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'recipes:profile' username=request.user.username %}"
+              >Profile</a
+            >
+         
           </li>
           <li class="nav-item">
             <!-- Add link to recipes_list.html -->
@@ -153,6 +177,19 @@
         <div class="details_long">
           <br />
           <a href="{% url 'recipes:list' %}" class="login_btn">Back</a>
+          {% if request.user.is_authenticated %}
+          <form method="post" action="{% url 'recipes:faved_recipe' object.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="heart-btn">
+              {% if is_liked %}
+                Unlike
+              {% else %}
+                Add to favorites
+              {% endif %}
+            </button>
+          </form>
+        {% endif %}
+      </div>
         </div>
       </div>
     </div>

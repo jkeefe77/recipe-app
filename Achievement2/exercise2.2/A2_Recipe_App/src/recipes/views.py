@@ -49,6 +49,17 @@ class RecipeDetailView(LoginRequiredMixin, DetailView):
         context["MEDIA_URL"] = settings.MEDIA_URL
         return context
 
+@login_required
+def recipe_detail(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    is_liked = request.user.fav_recipes.filter(pk=pk).exists()
+    
+    context = {
+        'recipe': recipe,
+        'is_liked': is_liked,
+    }
+
+    return render(request, 'recipes/detail.html', context)
 
 class RecipeListView(ListView):
     model = Recipe
