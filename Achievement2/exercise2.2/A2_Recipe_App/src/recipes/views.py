@@ -1,5 +1,6 @@
 import base64
 from io import BytesIO
+from django.urls import reverse
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -9,6 +10,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, DetailView, ListView
+from django.utils.html import format_html
 
 from .models import CustomUser, Recipe
 
@@ -36,7 +38,10 @@ class HomeView(LoginRequiredMixin, ListView):
         context["MEDIA_URL"] = settings.MEDIA_URL
         return context
 
-
+class SearchResultsView(ListView):
+    model= Recipe
+    template_name = "recipes/recipes_list.html"
+  
 class RecipeDetailView(LoginRequiredMixin, DetailView):
     model = Recipe
     template_name = "recipes/detail.html"
@@ -69,11 +74,18 @@ class RecipeListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         all_recipes = Recipe.objects.all()
-        context["recipes"] = all_recipes
+        context["recipes"] = [
+          {
+            "recipe": recipe,
+            "image_url": recipe.pic.url,
+            "pk": recipe.pk,
+          }
+          for recipe in all_recipes
+        ]
 
         # Generate the graph here
-        x = [recipe.name for recipe in all_recipes]
-        y = [recipe.cooking_time for recipe in all_recipes]
+        x = [recipe["recipe"].name for recipe in context["recipes"]]
+        y = [recipe["recipe"].cooking_time for recipe in context["recipes"]]
         chart = self.get_plot(x, y)
         context["chart"] = chart
         context["MEDIA_URL"] = settings.MEDIA_URL
@@ -131,11 +143,29 @@ class RecipeListView(ListView):
             context["chart"] = chart
 
         return render(self.request, "recipes/recipes_list.html", context)
-
+      
+    def get(self, request, *args, **kwargs):
+        # Handle the click on the recipe image
+        recipe_id = self.request.GET.get('recipe_id')
+        if recipe_id:
+            return redirect(reverse('recipes:detail', kwargs={'pk': recipe_id}))
+        else:
+            return super().get(request, *args, **kwargs)
+          
     def graph_view(request):
         # You can access the chart within the context here
         chart = request.context["chart"]
         return render(request, "recipes/recipes_list.html", {"chart": chart})
+      
+class Profile(LoginRequiredMixin, DetailView):
+    model = CustomUser
+    template_name = "recipes/profile.html"
+    context_object_name = "user"
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    
+    def get_object(self, queryset=None):
+        return get_object_or_404(CustomUser, username=self.kwargs['username'])
 
 
 class AddRecipe(LoginRequiredMixin, CreateView):
@@ -213,14 +243,6 @@ def update_profile_picture(request, username):
         return redirect("recipes:profile", username=request.user.username)
 
 
-class Profile(LoginRequiredMixin, DetailView):
-    model = CustomUser
-    template_name = "recipes/profile.html"
-    context_object_name = "user"
-    slug_field = "username"
-    slug_url_kwarg = "username"
-    
-    def get_object(self, queryset=None):
-        return get_object_or_404(CustomUser, username=self.kwargs['username'])
+
 
    

@@ -26,6 +26,7 @@ class Recipe(models.Model):
     description = models.TextField(default="")
     pic = models.ImageField(upload_to="recipes", default="no_pic.jpg")
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    
 
     difficulty = models.CharField(
         max_length=60,
