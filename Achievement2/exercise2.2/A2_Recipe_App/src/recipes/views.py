@@ -48,11 +48,39 @@ class SearchResultsView(ListView):
       query_name = self.request.GET.get('recipe_name')
       query_ingredients = self.request.GET.get('ingredients')
         
-        # Your search logic goes here, filter the queryset based on the search parameters
-        
       queryset = Recipe.objects.filter(name__icontains=query_name, ingredients__icontains=query_ingredients)
         
       return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["MEDIA_URL"] = settings.MEDIA_URL
+
+        # Generate the graph here
+        x = [recipe.name for recipe in context["object_list"]]
+        y = [recipe.cooking_time for recipe in context["object_list"]]
+        chart = self.get_plot(x, y)
+        context["chart"] = chart
+
+        return context
+
+    def get_plot(self, x, y):
+        buffer = BytesIO()
+        plt.switch_backend("AGG")
+        plt.figure(figsize=(10, 5))
+        plt.title("Recipe Chart")
+        plt.bar(x, y)
+        plt.xticks(rotation=45)
+        plt.xlabel("Recipes")
+        plt.ylabel("Cooking Time")
+        plt.tight_layout()
+        plt.savefig(buffer, format="png")
+        buffer.seek(0)
+        image_png = buffer.getvalue()
+        graph = base64.b64encode(image_png).decode("utf-8")
+        buffer.close()
+
+        return graph
   
 class RecipeDetailView(LoginRequiredMixin, DetailView):
     model = Recipe
