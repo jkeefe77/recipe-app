@@ -12,6 +12,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, DetailView, ListView
 from django.utils.html import format_html
 
+import recipes
+
 from .models import CustomUser, Recipe
 
 matplotlib.use("Agg")
@@ -41,6 +43,16 @@ class HomeView(LoginRequiredMixin, ListView):
 class SearchResultsView(ListView):
     model= Recipe
     template_name = "recipes/recipes_list.html"
+    
+    def get_queryset(self):  # new
+      query_name = self.request.GET.get('recipe_name')
+      query_ingredients = self.request.GET.get('ingredients')
+        
+        # Your search logic goes here, filter the queryset based on the search parameters
+        
+      queryset = Recipe.objects.filter(name__icontains=query_name, ingredients__icontains=query_ingredients)
+        
+      return queryset
   
 class RecipeDetailView(LoginRequiredMixin, DetailView):
     model = Recipe
@@ -132,7 +144,8 @@ class RecipeListView(ListView):
                 "recipes": recipes,
                 "form": form,
             }
-
+            if recipes:
+              return redirect('recipes:detail', pk=recipes[0].pk)
             if not recipes:
                 messages.info(self.request, "No recipes found")
 
@@ -148,7 +161,7 @@ class RecipeListView(ListView):
         # Handle the click on the recipe image
         recipe_id = self.request.GET.get('recipe_id')
         if recipe_id:
-            return redirect(reverse('recipes:detail', kwargs={'pk': recipe_id}))
+            return redirect(reverse('recipes:detail', kwargs={'pk': recipe_id[0].pk}))
         else:
             return super().get(request, *args, **kwargs)
           

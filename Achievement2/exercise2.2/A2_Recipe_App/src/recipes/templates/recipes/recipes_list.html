@@ -203,8 +203,8 @@
     <hr />
     <div class="center-form">
       <form
-        action="{% url 'recipes:list' %}"
-        method="post"
+        action="{% url 'recipes:search_results' %}"
+        method="get"
         id="recipe-search-form"
         enctype="multipart/form-data"
       >
@@ -220,7 +220,6 @@
           name="ingredients"
           placeholder="Search by ingredient"
         />
-
         {% csrf_token %}
         <button
           type="submit"
