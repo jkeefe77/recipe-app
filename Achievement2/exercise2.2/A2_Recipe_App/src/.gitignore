@@ -4,5 +4,3 @@
 # Database
 *.sqlite3
 
-# Security
-settings.py
