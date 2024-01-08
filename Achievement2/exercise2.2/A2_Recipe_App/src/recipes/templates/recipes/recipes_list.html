@@ -203,7 +203,7 @@
     <hr />
     <div class="center-form">
       <form
-        action="{% url 'recipes:search_results' %}"
+        action="{% url 'recipes:list' %}"
         method="get"
         id="recipe-search-form"
         enctype="multipart/form-data"
@@ -239,23 +239,77 @@
       </div>
     </div>
     <div class="grid_wrapper">
-      {% for object in object_list %}
       <div class="grid_item" style="text-align: center">
         <h2>
-          <a href="{{object.get_absolute_url}}" class="recipe_name">
-            {{object.name}}
-          </a>
+          <a href="/recipes/detail/1" class="recipe_name">Pizza</a>
         </h2>
         <br />
-        <a href="{{object.get_absolute_url}}">
+        <a href="/recipes/detail/1">
           <img
             class="food_images"
-            src="{{object.pic.url}}"
+            src="{% static 'recipes/images/pizza_nle7F0a.jpg' %}"
             alt="recipe_photo"
           />
         </a>
       </div>
-      {% endfor %}
+      <div class="grid_item" style="text-align: center">
+        <h2>
+          <a href="/recipes/detail/2" class="recipe_name"
+            >Chocolate Chip Cookies</a
+          >
+        </h2>
+        <br />
+        <a href="/recipes/detail/2">
+          <img
+            class="food_images"
+            src="{% static 'recipes/images/cookies_7rtgKQM.jpg' %}"
+            alt="recipe_photo"
+          />
+        </a>
+      </div>
+      <div class="grid_item" style="text-align: center">
+        <h2>
+          <a href="/recipes/detail/3" class="recipe_name">Greek Pasta Salad</a>
+        </h2>
+        <br />
+        <a href="/recipes/detail/3">
+          <img
+            class="food_images"
+            src="{% static 'recipes/images/greekpasta_tqm8CAd.jpg' %}"
+            alt="recipe_photo"
+          />
+        </a>
+      </div>
+      <div class="grid_item" style="text-align: center">
+        <h2>
+          <a href="/recipes/detail/4" class="recipe_name"
+            >Grilled Cheese Sandwich</a
+          >
+        </h2>
+        <br />
+        <a href="/recipes/detail/4">
+          <img
+            class="food_images"
+            src="{% static 'recipes/images/grilledcheese_RI6vumz.jpg' %}"
+            alt="recipe_photo"
+          />
+        </a>
+      </div>
+      <div class="grid_item" style="text-align: center">
+        <h2>
+          <a href="/recipes/detail/5" class="recipe_name"
+            >Taco Tortellini Bowl</a
+          >
+        </h2>
+        <br />
+        <a href="/recipes/detail/5">
+          <img
+            class="food_images"
+            src="{% static 'recipes/images/tortellini_H9wrAFL.jpg' %}"
+            alt="recipe_photo"
+          />
+        </a>
+      </div>
     </div>
   </body>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
