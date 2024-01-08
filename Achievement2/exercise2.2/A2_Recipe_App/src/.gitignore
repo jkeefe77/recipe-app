@@ -5,4 +5,4 @@
 *.sqlite3
 
 # Security
-*.settings.py
+settings.py
