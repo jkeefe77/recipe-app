@@ -41,15 +41,12 @@
         justify-content: center;
       }
       .details_short {
-        width: 40%;
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-top: 15vh;
         background-color: #f2f2f2;
-        border-radius: 10px;
         padding: 2px;
-        box-shadow: 1px 1px 1px #5c5c5c;
         margin: 0 auto;
         font-family: "Roboto Mono", "Calibri", "Trebuchet MS", sans-serif;
         font-size: 24px;
@@ -180,23 +177,13 @@
     <br />
     <div class="details_modal">
       <h2>{{object.name}}</h2>
-      <a href="/recipes/detail/1">
-          <img
-            class="food_images"
-            src="{% static 'recipes/images/pizza_nle7F0a.jpg' %}"
-            alt="recipe_photo"
-          />
-        </a>
-      </div>
       <br>
       <div class="details_body">
         <div class="details_short">
-          <b>Name: </b> {{object.name}} <br />
           <b>Description: </b> {{object.description}} <br />
           <b>Cooking Time: </b> {{object.cooking_time}} <br />
           <b>Difficulty: </b> {{object.difficulty|default:"Not Available"}} <br />
           <b>Ingredients: </b> {{object.ingredients}} <br />
-        
         <div class="details_long">
           <br />
           <a href="{% url 'recipes:list' %}" class="login_btn">Back</a>
