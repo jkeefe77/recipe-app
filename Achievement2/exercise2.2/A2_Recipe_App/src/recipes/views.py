@@ -10,9 +10,8 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, DetailView, ListView
-from django.utils.html import format_html
 
-import recipes
+
 
 from .models import CustomUser, Recipe
 
@@ -41,7 +40,7 @@ class HomeView(LoginRequiredMixin, ListView):
         return context
 
 class SearchResultsView(ListView):
-    model= Recipe
+    model = Recipe
     template_name = "recipes/recipes_list.html"
     
     def get_queryset(self):  # new
@@ -56,11 +55,12 @@ class SearchResultsView(ListView):
         context = super().get_context_data(**kwargs)
         context["MEDIA_URL"] = settings.MEDIA_URL
 
-        # Generate the graph here
+       # Generate the graph here
         x = [recipe.name for recipe in context["object_list"]]
         y = [recipe.cooking_time for recipe in context["object_list"]]
         chart = self.get_plot(x, y)
         context["chart"] = chart
+        context["MEDIA_URL"] = settings.MEDIA_URL
 
         return context
 
@@ -81,7 +81,7 @@ class SearchResultsView(ListView):
         buffer.close()
 
         return graph
-  
+      
 class RecipeDetailView(LoginRequiredMixin, DetailView):
     model = Recipe
     template_name = "recipes/detail.html"
@@ -122,15 +122,17 @@ class RecipeListView(ListView):
           }
           for recipe in all_recipes
         ]
-
+        
         # Generate the graph here
-        x = [recipe["recipe"].name for recipe in context["recipes"]]
-        y = [recipe["recipe"].cooking_time for recipe in context["recipes"]]
+        x = [recipe.name for recipe in context["recipes"]]
+        y = [recipe.cooking_time for recipe in context["recipes"]]
         chart = self.get_plot(x, y)
         context["chart"] = chart
         context["MEDIA_URL"] = settings.MEDIA_URL
 
         return context
+        
+    
 
     def get_plot(self, x, y):
         buffer = BytesIO()
@@ -149,7 +151,8 @@ class RecipeListView(ListView):
         buffer.close()
         
         return graph
-
+      
+      
     def post(self, request, *args, **kwargs):
         form = RecipeSearchForm(self.request.POST)
 
@@ -172,6 +175,14 @@ class RecipeListView(ListView):
                 "recipes": recipes,
                 "form": form,
             }
+
+            if not recipe_name and not ingredients:
+                recipes = Recipe.objects.all()
+
+            context = {
+                "recipes": recipes,
+                "form": form,
+            }
             if recipes:
               return redirect('recipes:detail', pk=recipes[0].pk)
             if not recipes:
@@ -184,6 +195,10 @@ class RecipeListView(ListView):
             context["chart"] = chart
 
         return render(self.request, "recipes/recipes_list.html", context)
+    
+    
+   
+    
       
     def get(self, request, *args, **kwargs):
         # Handle the click on the recipe image
@@ -193,11 +208,7 @@ class RecipeListView(ListView):
         else:
             return super().get(request, *args, **kwargs)
           
-    def graph_view(request):
-        # You can access the chart within the context here
-        chart = request.context["chart"]
-        return render(request, "recipes/recipes_list.html", {"chart": chart})
-      
+  
 class Profile(LoginRequiredMixin, DetailView):
     model = CustomUser
     template_name = "recipes/profile.html"

@@ -203,7 +203,7 @@
     <hr />
     <div class="center-form">
       <form
-        action="{% url 'recipes:list' %}"
+        action="{% url 'recipes:search_results' %}"
         method="get"
         id="recipe-search-form"
         enctype="multipart/form-data"
@@ -235,9 +235,25 @@
       <div class="graph-container">
         {% if chart %}
         <img src="data:image/png;base64,{{ chart|safe }}" />
+        {% else %}
+        <p>No Chart Available</p>
         {% endif %}
       </div>
     </div>
+    {% if recipes %}
+    <div class="recipe-results">
+      <h2>Search Results</h2>
+      <ul>
+        {% for recipe in recipes %}
+        <li>
+          <a href="{% url 'recipes:search_results}">{{ object.name.url }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% else %}
+    <p>No recipes found.</p>
+    {% endif %}
     <div class="grid_wrapper">
       <div class="grid_item" style="text-align: center">
         <h2>

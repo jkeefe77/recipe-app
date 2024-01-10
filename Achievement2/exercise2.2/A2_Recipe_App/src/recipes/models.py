@@ -11,7 +11,7 @@ from django.urls import reverse
 class Recipe(models.Model):
     BEGINNER = "Beginner"
     INTERMEDIATE = "Intermediate"
-    HARD = "HARD"
+    HARD = "Hard"
 
     DIFFICULTY_CHOICES = [
         (BEGINNER, "Beginner"),
