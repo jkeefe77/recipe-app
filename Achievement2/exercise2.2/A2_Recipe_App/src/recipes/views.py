@@ -61,7 +61,7 @@ class SearchResultsView(ListView):
         chart = self.get_plot(x, y)
         context["chart"] = chart
         context["MEDIA_URL"] = settings.MEDIA_URL
-
+        context["filtered_recipes"] = context["object_list"]
         return context
 
     def get_plot(self, x, y):

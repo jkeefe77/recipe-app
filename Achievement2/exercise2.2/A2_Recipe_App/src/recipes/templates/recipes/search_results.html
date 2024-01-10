@@ -262,26 +262,21 @@
         {% endif %}
       </div>
     </div>
-
-    {% if recipes %}
-    <div class="recipe-results">
-      <h2>Search Results</h2>
-      <ul>
-        {% for recipe in recipes %}
-        <li>
-          <a href="{% url 'recipes:detail' pk=recipe.pk %}">
-            <img src="{{ recipe.pic.url }}" alt="{{ recipe.name }}" />
-          </a>
+    {% if filtered_recipes %}
+      <div class="grid_wrapper">
+        {% for recipe in filtered_recipes %}
+        <div class="grid_item" style="text-align: center">
           <h3>{{ recipe.name }}</h3>
-          <p>{{ recipe.description }}</p>
-        </li>
+          <img src="{% if recipe.pic %}{% static recipe.pic.url %}{% else %}{% static 'path/to/placeholder_image.jpg' %}{% endif %}" alt="{{ recipe.name }}">
+          <p>{{ recipe.pic.url }}</p>
+          <a href="{% url 'recipes:detail' pk=recipe.pk %}" style="font-size: 20px; display: block; margin: 0 auto; text-align: center;">View Recipe</a>
+        </div>
         {% endfor %}
-      </ul>
+    </div>
     </div>
     {% else %}
     <p>No recipes found.</p>
     {% endif %}
-
     <h1>Search for more Recipes</h1>
     <hr />
     <div class="center-form">
