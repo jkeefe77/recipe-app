@@ -124,8 +124,8 @@ class RecipeListView(ListView):
         ]
         
         # Generate the graph here
-        x = [recipe.name for recipe in context["recipes"]]
-        y = [recipe.cooking_time for recipe in context["recipes"]]
+        x = [recipe["recipe"].name for recipe in context["recipes"]]
+        y = [recipe["recipe"].cooking_time for recipe in context["recipes"]]
         chart = self.get_plot(x, y)
         context["chart"] = chart
         context["MEDIA_URL"] = settings.MEDIA_URL
