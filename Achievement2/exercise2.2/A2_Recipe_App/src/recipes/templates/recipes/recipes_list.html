@@ -235,9 +235,7 @@
       <div class="graph-container">
         {% if chart %}
         <img src="data:image/png;base64,{{ chart|safe }}" />
-        {% else %}
-        <p>No Chart Available</p>
-        {% endif %}
+        {% else %} {% endif %}
       </div>
     </div>
     <div class="grid_wrapper">

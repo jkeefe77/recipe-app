@@ -140,7 +140,7 @@
       }
       .grid_item {
         padding: 10px;
-        background-color: transparent;
+        background-color: white;
         margin: 10px;
         flex-wrap: wrap;
         text-align: center;
@@ -267,8 +267,6 @@
         {% for recipe in filtered_recipes %}
         <div class="grid_item" style="text-align: center">
           <h3>{{ recipe.name }}</h3>
-          <img src="{% if recipe.pic %}{% static recipe.pic.url %}{% else %}{% static 'path/to/placeholder_image.jpg' %}{% endif %}" alt="{{ recipe.name }}">
-          <p>{{ recipe.pic.url }}</p>
           <a href="{% url 'recipes:detail' pk=recipe.pk %}" style="font-size: 20px; display: block; margin: 0 auto; text-align: center;">View Recipe</a>
         </div>
         {% endfor %}
