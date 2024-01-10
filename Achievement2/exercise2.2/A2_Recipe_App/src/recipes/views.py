@@ -41,7 +41,7 @@ class HomeView(LoginRequiredMixin, ListView):
 
 class SearchResultsView(ListView):
     model = Recipe
-    template_name = "recipes/recipes_list.html"
+    template_name = "recipes/search_results.html"
     
     def get_queryset(self):  # new
       query_name = self.request.GET.get('recipe_name')
