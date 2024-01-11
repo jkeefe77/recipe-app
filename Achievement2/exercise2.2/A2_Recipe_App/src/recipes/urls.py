@@ -1,9 +1,14 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import HomeView, RecipeListView, RecipeDetailView, Profile, faved_recipe, SearchResultsView
-
-
+from .views import (
+    HomeView,
+    RecipeListView,
+    RecipeDetailView,
+    Profile,
+    faved_recipe,
+    SearchResultsView,
+)
 
 
 app_name = "recipes"
@@ -15,10 +20,9 @@ urlpatterns = [
     path("list/", RecipeListView.as_view(), name="list"),
     path("detail/<pk>", RecipeDetailView.as_view(), name="detail"),
     path("profile/<slug:username>/", Profile.as_view(), name="profile"),
-    path('faved_recipe/<int:recipe_id>/', faved_recipe, name='faved_recipe')
+    path("faved_recipe/<int:recipe_id>/", faved_recipe, name="faved_recipe"),
 ]
 
 
 if settings.DEBUG:
-  
-  urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
