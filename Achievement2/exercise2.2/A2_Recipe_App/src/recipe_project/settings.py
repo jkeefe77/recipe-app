@@ -8,7 +8,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import django_heroku
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -136,9 +135,10 @@ django_heroku.settings(locals())
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Heroku: Update database configuration from $DATABASE_URL.
+import django_heroku
 import dj_database_url
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES
 {"default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))}
-django_heroku.settings(locals(), staticfiles=False)
+django_heroku.settings(locals())
