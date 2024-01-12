@@ -138,7 +138,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 import django_heroku
 import dj_database_url
 
+django_heroku.settings(locals(), staticfiles=True)
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES
 {"default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))}
-django_heroku.settings(locals())
