@@ -122,7 +122,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static/recipe_project"),
+    os.path.join(
+        BASE_DIR,
+        "C:/Users/jvkee/Documents/careerfoundry/recipe-app/Achievement2/exercise2.2/A2_Recipe_App/src/static",
+    ),
     os.path.join(BASE_DIR, "recipes/static/recipes"),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
