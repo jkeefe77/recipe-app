@@ -17,18 +17,19 @@
         <a href="{% url 'logout' %}">Logout</a>
       </navbar__link-container>
     </navbar>
-
-    <div class="recipe-grid">
-      {% for object in object_list %}
-      <div class="recipe-tile">
-        <img src="{{object.pic.url}}" />
-        <a href="{{object.get_absolute_url}}" class="recipe-tile__tag">
-          <h3>{{object.name}}</h3>
-          <b>Cooking Time: </b> {{object.cooking_time}} <br />
-          <b>Difficulty: </b> {{object.calculate_difficulty}} <br />
-        </a>
+    <div class="row">
+      <div class="recipe-grid">
+        {% for object in object_list %}
+        <div class="recipe-tile">
+          <img src="{{object.pic.url}}" />
+          <a href="{{object.get_absolute_url}}" class="recipe-tile__tag">
+            <h3>{{object.name}}</h3>
+            <b>Cooking Time: </b> {{object.cooking_time}} <br />
+            <b>Difficulty: </b> {{object.calculate_difficulty}} <br />
+          </a>
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
   </body>
 </html>
