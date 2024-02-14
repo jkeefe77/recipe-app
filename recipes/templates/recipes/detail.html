@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% load static %}
     <link rel="stylesheet" href="{% static 'recipes/css/draft.css' %}" />
-    <title>BRE {{object.name}}</title>
+    <title>GG {{object.name}}</title>
   </head>
   <body>
     <navbar>
@@ -21,7 +21,7 @@
 
     <section class="recipe-view">
       <div class="img-container">
-        <img src="{{object.pic}}" width="300" height="auto" />
+        <img src="{{object.pic.url}}" width="300" height="auto" />
       </div>
       <div class="content-container">
         <h2>{{object.name}}</h2>
