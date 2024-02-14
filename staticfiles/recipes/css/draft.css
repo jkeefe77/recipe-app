@@ -126,7 +126,7 @@ a {
 }
 
 .recipe-tile__tag {
-  background-color: var(--tag-bg-1);
+  background-color: #d9ccc5;
   color: black;
   position: absolute;
   top: 0;
@@ -134,8 +134,8 @@ a {
   padding: 0.75rem 2rem 2rem 0.75rem;
   border-bottom-right-radius: 50%;
   text-decoration: none;
-  text-shadow: 0px 1px var(--tag-text-shadow), 0px -1px var(--tag-text-shadow),
-    1px 0px var(--tag-text-shadow), -1px 0px var(--tag-text-shadow);
+  /* text-shadow: 0px 1px var(--tag-text-shadow), 0px -1px var(--tag-text-shadow),
+    1px 0px var(--tag-text-shadow), -1px 0px var(--tag-text-shadow); */
   font-weight: bold;
 }
 
@@ -154,19 +154,19 @@ a {
   color: black;
   margin: 0 0 0.8rem;
   text-decoration: underline;
-  text-decoration-color: var(--tag-title-underline);
+  /* text-decoration-color: var(--tag-title-underline); */
   font-size: 1.2em;
-  text-shadow: 1px 1px var(--tag-text-shadow);
+  /* text-shadow: 1px 1px var(--tag-text-shadow); */
 }
 
 navbar {
-  background-color: var(--primary-1);
+  background-color: #223f59;
   display: flex;
   position: sticky;
   top: 0;
   z-index: 1;
   margin-bottom: 1rem;
-  border-bottom: 2px solid var(--primary-3);
+  border-bottom: #223f59;
 }
 
 navbar__link-container {
@@ -176,7 +176,7 @@ navbar__link-container {
 }
 
 navbar__link-container a {
-  background-color: var(--primary-4);
+  background-color: #223f59;
   padding: 0.6rem 1.2rem;
   color: white;
   text-decoration: none;
@@ -184,7 +184,7 @@ navbar__link-container a {
 
 navbar__link-container a:hover,
 navbar__link-container a:active {
-  background-color: var(--primary-2);
+  background-color: #81a64b;
 }
 
 navbar__link-container a:focus {
@@ -197,14 +197,9 @@ navbar__link-container a:last-child {
 }
 
 .recipe-view .img-container img {
-  background-color: #dedede;
-  padding: 0;
-  margin-left: 0.5rem;
-  border: 1px solid #ddd;
-  box-shadow: 0 0.25rem 0.25rem #1234;
-  min-height: 15rem;
-  min-width: 15rem;
-  width: auto;
+  max-width: 100%;
+  height: auto;
+  text-align: center;
 }
 
 .recipe-view .content-container {
@@ -275,4 +270,33 @@ navbar__link-container a:last-child {
   background-color: #eaeaea;
   margin-top: 0;
   padding: 0.5rem 0.5rem 0;
+}
+
+.form_data {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+label {
+  font-weight: bold;
+}
+
+li {
+  display: none;
 }
