@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'recipes/css/draft.css' %}" />
+    <title>BRE {{object.name}}</title>
+  </head>
+  <body>
+    <navbar>
+      <navbar__link-container>
+        <a href="{% url 'list' %}">All Recipes</a>
+        <a href="{% url 'create' %}">Create</a>
+        <a href="{% url 'records' %}">Records</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'logout' %}">Logout</a>
+      </navbar__link-container>
+    </navbar>
+
+    <section class="recipe-view">
+      <div class="img-container">
+        <img src="{{object.pic}}" width="300" height="auto" />
+      </div>
+      <div class="content-container">
+        <h2>{{object.name}}</h2>
+        <p><b>Genre: </b>{{object.genre}}</p>
+        <p><b>Cooking Time: </b>{{object.cooking_time}}</p>
+        <p><b>Ingredients: </b>{{object.ingredients}}</p>
+        <p><b>Difficulty: </b>{{object.calculate_difficulty}}</p>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>GG Recipes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'recipes/css/draft.css' %}" />
+  </head>
+
+  <body>
+    <navbar>
+      <navbar__link-container>
+        <a href="{% url 'list' %}">All Recipes</a>
+        <a href="{% url 'create' %}">Create</a>
+        <a href="{% url 'records' %}">Records</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'logout' %}">Logout</a>
+      </navbar__link-container>
+    </navbar>
+
+    <div class="recipe-grid">
+      {% for object in object_list %}
+      <div class="recipe-tile">
+        <img src="{{object.pic.url}}" />
+        <a href="{{object.get_absolute_url}}" class="recipe-tile__tag">
+          <h3>{{object.name}}</h3>
+          <b>Cooking Time: </b> {{object.cooking_time}} <br />
+          <b>Difficulty: </b> {{object.calculate_difficulty}} <br />
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>

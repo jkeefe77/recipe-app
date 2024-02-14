@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>BRE Create</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel='stylesheet' href="{% static 'recipes/css/draft.css' %}">
+</head>
+
+<body>
+  <navbar>
+    <navbar__link-container>
+      <a href="{% url 'list' %}">All Recipes</a>
+      <a href="{% url 'create' %}">Create</a>
+      <a href="{% url 'records' %}">Records</a>
+      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'logout' %}">Logout</a>
+    </navbar__link-container>
+  </navbar>
+
+  <h1>Create Recipe</h1>
+  <form action="" method="POST" class="form_data" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{create_form.as_p}}
+    <button type="submit">Create</button>
+  </form>
+
+</body>
+
+</html>

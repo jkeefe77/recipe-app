@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>BRE Records</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel='stylesheet' href="{% static 'recipes/css/draft.css' %}">
+  <script src="{% static 'recipes/js/records.js' %}" defer="true"></script>
+</head>
+
+<body>
+  <navbar>
+    <navbar__link-container>
+      <a href="{% url 'list' %}">All Recipes</a>
+      <a href="{% url 'create' %}">Create</a>
+      <a href="{% url 'records' %}">Records</a>
+      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'logout' %}">Logout</a>
+    </navbar__link-container>
+  </navbar>
+
+  <h1>Recipe Records</h1>
+  <hr />
+
+  <h2>Charts</h2>
+  <form action="" method="POST" class="form_data">
+    {% csrf_token %}
+    {{chart_form}}
+    <button type="submit">Generate</button>
+    <div class="chart-container">
+      <img alt='chart' src="data:image/png;base64, {{chart|safe}}">
+    </div>
+
+    <section class="gray-section">
+      <h2>Recipes Table</h2>
+      <h3>Filter By...</h3>
+      <div class="recipe-filter-container">
+        <p>Name: </p>
+        <input type="text" id="recipe-name-filter" />
+        <p>Ingredient: </p>
+        <input type="text" id="recipe-ingredients-filter" />
+      </div>
+    </section>
+      {% if recipe_df %}
+      <div class="df-container">
+        {{recipe_df|safe}}
+      </div>
+      {% else %}
+      <h3>No Data to Show...</h3>
+      <p>Select filters above and click "Generate".</p>
+      {% endif %}
+    </form>
+
+</body>
+
+</html>

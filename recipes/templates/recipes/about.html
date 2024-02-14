@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'recipes/css/draft.css' %}" />
+    <title>Documentation</title>
+  </head>
+
+  <body>
+    <div class="banner">
+      <img
+        src="{% static 'recipes/images/kitchen.jpg' %}"
+        alt="bell peppers and a spoon of pepper flakes"
+      />
+    </div>
+
+    <h1 style="padding-left: 1em">About — Gourmet Genie</h1>
+    <section style="padding: 0.75em">
+      <p>
+        Gourmet Genie is designed to make cooking fun and manageable! Built with
+        Django, hosted with Heroku. Light-weight, no-nonsense. Let's make some
+        awesome food!
+      </p>
+
+      <br />
+      <a href="javascript:history.go(-1)" class="button-big">Back to Records</a>
+    </section>
+  </body>
+</html>
