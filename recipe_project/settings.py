@@ -53,6 +53,8 @@ MIDDLEWARE = [
    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+
 ROOT_URLCONF = 'recipe_project.urls'
 
 TEMPLATES = [

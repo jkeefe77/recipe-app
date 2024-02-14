@@ -119,3 +119,5 @@ def records_view(request):
 
     # load the template and send the context dictionary to template
     return render(request, 'recipes/records.html', context)
+  
+
