@@ -2,46 +2,85 @@
 
 ## Description
 
-This project is built using Python and is run through the command line.
+This project was built with:
+
+HTML, CSS, JavaScript
+Python 3
+Django
+Pandas
 
 ## Features
 
-When completed, this app will
+<!-- GETTING STARTED -->
 
-- Enable users to create and modify recipes on a locally hosted MySQL database
-- Allow users to search for recipes by ingredient
-- Rate each recipe based on difficulty
-- Display recipe details, including ingredients, cooking time, and difficulty, when prompted by the user
+## Getting Started
 
-Right now this app asks users to input two numbers and returns the sum.
+<!-- PREREQUISITES -->
 
-## App Structure
+### Prerequisites
 
-### Outer Structure
+- Python 3
+- Please see the "requirements.txt" file
 
-Each recipe is contained in the list `recipes_list`. Storing recipes as a list enables modification of each element, indexing, sorting, and use of any data type. All ingredients are also stored in a list called `ingredients_list`.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Recipe Structure
+<!-- INSTALLATION -->
 
-This app uses dictionaries to store each recipe. Dictionaries are the best approach because they store key-value pairs, and they allow the keys and values to take any data type. Each recipe in this app is created through user input with the `take_recipe()` function and have the following format:
+### Installation
 
-```python
-recipe = {
-  'Name': 'name of the recipe as a string',
-  'Cooking time': 0, # cooking time in minutes as an integer
-  'ingredients': ['list', 'of', 'ingredients'],
-  'Difficulty': 'level of difficulty calculated by cooking time and number of ingredients`
-}
+Note: Run these commands in the terminal from the desired root directory
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/jkeefe77/recipe-app.git
+   ```
+2. Install the requirements
+   ```sh
+   pip install -r requirements.txt
+   ```
+3. Migrate the database
+   ```sh
+   python manage.py migrate
+   ```
+4. Run the local server
+   ```sh
+   python manage.py runserver
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- UX NOTES -->
+
+## UX-Notes
+
+- Login with username: "username" and password: "password" (this is a standard account not currently able to delete recipes)
+***working on serving media files through heroku without deletion***
+- Click on a recipe tile to see its details
+- Click on the "Records" tab to search recipes by Name or Ingredient (and see helpful charts).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- PROJECT DEPLOYMENT -->
+
+## Project Links
+
+Project Deployment: [https://stark-island-85026-45df70d91760.herokuapp.com/](https://stark-island-85026-45df70d91760.herokuapp.com/)
+
+Project Repository: [https://github.com/jkeefe77/recipe-app](https://github.com/jkeefe77/recipe-app)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- SCREENSHOTS -->
+
+
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License. See <a href="LICENSE.txt">`LICENSE.txt`</a> for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ```
 
-## Running the app
-
-After installing Python 3.8 or higher, use the command line to do the following:
-
-```bash
-git clone https://github.com/jkeefe77/Python
-cd python
-pip3.8 install -r requirements.txt
-mkvirtualenv <name new virtual environment>
-python exercise1.3/exercise1.3.py
 ```
