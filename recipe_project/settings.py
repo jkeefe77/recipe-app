@@ -135,6 +135,7 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 import dj_database_url
@@ -142,3 +143,10 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 import dj_database_url
 
 DATABASES['default'] = dj_database_url.config(default='postgres://quwclzgodbeeyo:2e01438a1d4c836783804d22fbaa12542fa792f5f807fa2109558d74fab04214@ec2-44-213-151-75.compute-1.amazonaws.com:5432/dbgj1nigcp9gda')
+AWS_STORAGE_BUCKET_NAME = 'bucketeer-c49acfcc-eefe-455c-b621-2b020da34fe4'
+AWS_S3_REGION_NAME = 'us-east-1'
+AWS_ACCESS_KEY_ID = 'AKIAX7CRDYXPWQR2XV3A'
+AWS_SECRET_ACCESS_KEY = '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'
+
+# Optional: Configure URL that will be used to access the files on the storage
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
