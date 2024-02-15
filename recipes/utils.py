@@ -46,19 +46,7 @@ def get_chart(chart_type, data, **kwargs):
             totals.append(counter)
         return totals
 
-    def get_avg_ratings():
-        genres = get_genres()
-        ratings = []
-        for gen in genres:
-            totalizer = 0
-            counter = 0
-            for e, g in enumerate(data['genre']):
-                if g == gen:
-                    totalizer += data['rating'][e]
-                    counter += 1
-            avg_rating = totalizer / counter
-            ratings.append(avg_rating)
-        return ratings
+  
 
     def get_avg_cook_times():
         genres = get_genres()
@@ -82,14 +70,9 @@ def get_chart(chart_type, data, **kwargs):
         print('pie chart: ', genres, totals)
         plt.pie(totals, labels=genres)
 
+   
+
     elif chart_type == '#2':
-        genres = get_genres()
-        ratings = get_avg_ratings()
-
-        print('bar chart: ', genres, ratings)
-        plt.bar(genres, ratings)
-
-    elif chart_type == '#3':
         genres = get_genres()
         cook_times = get_avg_cook_times()
 

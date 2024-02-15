@@ -49,7 +49,7 @@ def create_view(request):
                 cooking_time = request.POST.get('cooking_time'),
                 genre = request.POST.get('genre'),
                 ingredients = request.POST.get('ingredients'),
-                rating = request.POST.get('rating'),
+                
                 # pic = request.POST.get('pic')
             )
 
@@ -64,7 +64,6 @@ def create_view(request):
         'cooking_time': cooking_time,
         'genre': genre,
         'ingredients': ingredients,
-        'rating': rating,
         # 'pic': pic
     }
 
