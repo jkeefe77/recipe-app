@@ -139,4 +139,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+import dj_database_url
+
+DATABASES['default'] = dj_database_url.config(default='postgres://quwclzgodbeeyo:2e01438a1d4c836783804d22fbaa12542fa792f5f807fa2109558d74fab04214@ec2-44-213-151-75.compute-1.amazonaws.com:5432/dbgj1nigcp9gda')
