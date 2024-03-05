@@ -150,3 +150,4 @@ AWS_SECRET_ACCESS_KEY = 'JHFM0SIGPmlHiFE/POiM70/2npwGsiRnW8olJbhx'
 
 # Optional: Configure URL that will be used to access the files on the storage
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+SESSION_COOKIE_SECURE = True
