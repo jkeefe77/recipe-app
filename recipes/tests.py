@@ -6,7 +6,7 @@ from .forms import RecipeChartForm
 
 
 class RecipeModelTest(TestCase):
-    def setUpTestData():
+    def setUpTestData(self):
         # Set up non-modified objects used by all test methods
         Recipe.objects.create(
             name='Tasty Cito Salsa',
